@@ -17,8 +17,11 @@ public class ticTacToe {
 
 	public JFrame frame;
 	public JTextField textField;
-	public boolean player1_turn;
-
+	public boolean player1_turn = true;
+	public JButton[][] button = new JButton[3][3];
+	public JPanel gridPanel;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +65,7 @@ public class ticTacToe {
 		textField.setText("Tic Tac Toe");
 		textField.setOpaque(true);
 		frame.getContentPane().add(textField, BorderLayout.NORTH);
-
+		
 		JButton btnMultiPlayer = new JButton("Multi Player");
 		btnMultiPlayer.setBounds(230, 300, 158, 25);
 		frame.getContentPane().add(btnMultiPlayer, BorderLayout.CENTER);
@@ -100,4 +103,67 @@ public class ticTacToe {
 			}
 		});
 	}
-}
+	
+    public void check() {
+    	for (int i = 0; i < 3; i++) {
+            if (button[i][0].getText().equals(button[i][1].getText()) &&
+                button[i][1].getText().equals(button[i][2].getText()) &&
+                !button[i][0].getText().equals("")) {
+                showWinner(button[i][0].getText());
+                return;
+            }
+        }
+        
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (button[0][i].getText().equals(button[1][i].getText()) &&
+                button[1][i].getText().equals(button[2][i].getText()) &&
+                !button[0][i].getText().equals("")) {
+                showWinner(button[0][i].getText());
+                return;
+            }
+        }
+        
+        // Check diagonals
+        if (button[0][0].getText().equals(button[1][1].getText()) &&
+            button[1][1].getText().equals(button[2][2].getText()) &&
+            !button[0][0].getText().equals("")) {
+            showWinner(button[0][0].getText());
+            return;
+        }
+        
+        if (button[0][2].getText().equals(button[1][1].getText()) &&
+            button[1][1].getText().equals(button[2][0].getText()) &&
+            !button[0][2].getText().equals("")) {
+            showWinner(button[0][2].getText());
+            return;
+        }
+        
+        // Check for draw
+        boolean draw = true;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (button[i][j].getText().equals("")) {
+                    draw = false;
+                    break;
+                }
+            }
+        }
+        if (draw) {
+            textField.setText("Draw");
+        }
+    }
+    
+    private void showWinner(String winner) {
+    	textField.setText(winner + " wins");
+        disableButtons();
+    }
+    
+    private void disableButtons() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                button[i][j].setEnabled(false);
+            }
+        }
+    }
+    }

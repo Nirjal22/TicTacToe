@@ -26,33 +26,37 @@ public class multiPlayer extends ticTacToe{
 	}
 	
 	public void forMulti() {
-		JPanel gridPanel = new JPanel();
+		gridPanel = new JPanel();
 		
 	      gridPanel.setLayout(new GridLayout(3, 3));
-//	      frame.setSize(600, 600);
 
-	        for(int i = 0; i < 9; i++) {
-	            JButton button = new JButton("");
-	            button.setFont(new Font("Ink Free", Font.BOLD, 120));
-	            button.setFocusable(false);
-	            button.addActionListener(new ActionListener() {
+	        for(int i = 0; i < 3; i++) {
+	        	for(int j = 0;j<3;j++) {
+	            button[i][j] = new JButton("");
+	            button[i][j].setFont(new Font("Ink Free", Font.BOLD, 120));
+	            button[i][j].setFocusable(false);
+	            button[i][j].addActionListener(new ActionListener() {
 	                public void actionPerformed(ActionEvent e) {
+	                	JButton button = (JButton)e.getSource();
 	                    if (button.getText().equals("")) {
 	                        if (player1_turn) {
 	                            button.setForeground(new Color(255, 0, 0));
 	                            button.setText("X");
 	                            textField.setText("O's turn");
 	                            player1_turn = false;
+	                            
 	                        } else {
 	                            button.setForeground(new Color(0, 0, 255));
 	                            button.setText("O");
 	                            textField.setText("X's turn");
 	                            player1_turn = true;
 	                        }
+	                        check();
 	                    }
 	                }
-	            });
-	            gridPanel.add(button);
+	        	});
+	            gridPanel.add(button[i][j]);
+	        }
 	        }
 	        frame.getContentPane().add(gridPanel, BorderLayout.CENTER);
 	    }

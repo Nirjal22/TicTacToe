@@ -14,7 +14,6 @@ public class singlePlayer extends ticTacToe{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(200, 163, 72));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().setLayout(null);
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.setBounds(300, 300, 600, 600);
 		
@@ -24,9 +23,8 @@ public class singlePlayer extends ticTacToe{
 	}
 	
 	public void forSingle(){
-		JPanel gridPanel = new JPanel();
+		gridPanel = new JPanel();
 	      gridPanel.setLayout(new GridLayout(3, 3));
-	      frame.setSize(600, 600);
 	      
 	      for(int i = 0; i<9; i++) {
 	    	  JButton button = new JButton("");
